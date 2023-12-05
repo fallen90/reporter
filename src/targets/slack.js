@@ -139,6 +139,17 @@ function getFailureDetails(suite) {
   }
 }
 
+function getUsername(){
+  const username = target.inputs.username ? target.inputs.username : 'test-reporter';
+  return username;
+}
+
+function getIconOrIconUrl(){
+  const icon_emoji = target.inputs.icon_emoji ? target.inputs.icon_emoji : ':test_tube:';
+  const icon_url = target.inputs.icon_url ? target.inputs.icon_url : null;
+  return icon_url ? { icon_url } : { icon_emoji };
+}
+
 /**
  * 
  * @param {object} param0 
@@ -161,6 +172,8 @@ function getRootPayload({ result, payload }) {
     }
   }
   return {
+    ...getIconOrIconUrl(),
+    username: getUsername(),
     "attachments": [
       {
         "color": color,
